@@ -7,6 +7,7 @@ using osu.Framework.Allocation;
 using osu.Framework.Configuration;
 using osu.Framework.Extensions.ObjectExtensions;
 using osu.Framework.Graphics;
+using osu.Framework.Logging;
 using osu.Framework.Platform;
 
 namespace osu.Framework.Tests.Visual.Platform
@@ -43,6 +44,8 @@ namespace osu.Framework.Tests.Visual.Platform
             Display display = null!;
 
             WindowMode startingMode = getWindowModeForState(startingState);
+
+            window.CurrentDisplayBindable.BindValueChanged(e => Logger.Log($"display changed to {e.NewValue}"));
 
             // this shouldn't be necessary, but SDL2DesktopWindow doesn't set the config WindowMode when changing the WindowState only.
             AddStep($"switch to {startingMode}", () => window.WindowMode.Value = startingMode);

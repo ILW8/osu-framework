@@ -182,7 +182,10 @@ namespace osu.Framework.Tests.Visual.Platform
             windowContainer.Width = fullscreen ? currentBounds.Width : window.Size.Width;
             windowContainer.Height = fullscreen ? currentBounds.Height : window.Size.Height;
             windowContainer.Position -= screenContainerOffset;
-            windowCaption.Text = $"{windowMode}\nSize: {window.Size.Width}x{window.Size.Height}\nClient: {window.ClientSize.Width}x{window.ClientSize.Height}";
+            windowCaption.Text = $"{windowMode}\n"
+                                 + $"Size: {window.Size.Width}x{window.Size.Height}\n"
+                                 + $"Client: {window.ClientSize.Width}x{window.ClientSize.Height}\n"
+                                 + $"Window position: {window.Position.X}, {window.Position.Y}";
         }
 
         protected override void Update()
