@@ -977,6 +977,13 @@ namespace osu.Framework.Platform
 
             currentDisplayMode = Window.CurrentDisplayMode.GetBoundCopy();
             currentDisplayMode.BindValueChanged(_ => updateFrameSyncMode());
+            Window.CurrentDisplayBindable.BindValueChanged(evt =>
+            {
+                if (Renderer is not VeldridRenderer veldridRenderer) return;
+
+                var bounds = evt.NewValue.Bounds;
+                veldridRenderer.Device.DisplayLinkUpdateActiveMonitor(bounds.X, bounds.Y, bounds.Width, bounds.Height);
+            }, true);
 
             IsActive.BindTo(Window.IsActive);
         }
